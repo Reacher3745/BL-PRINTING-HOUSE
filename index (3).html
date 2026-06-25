@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BL Printing House – Quality Print Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #B8860B;
+    --gold-light: #D4A017;
+    --gold-pale: #FFF8E7;
+    --dark: #1A1208;
+    --charcoal: #2C2416;
+    --ink: #3D3020;
+    --white: #FFFFFF;
+    --off-white: #FAFAF7;
+    --text-muted: #6B5C40;
+    --border: rgba(184,134,11,0.2);
+    --shadow: 0 4px 24px rgba(26,18,8,0.10);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--off-white); color: var(--dark); }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 1000;
+    background: rgba(26,18,8,0.96); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(184,134,11,0.3);
+    padding: 0 2rem;
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px; text-decoration: none;
+  }
+  .nav-logo-icon {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; font-weight: 900; color: var(--dark);
+    letter-spacing: -1px;
+  }
+  .nav-logo-text { font-family: 'Playfair Display', serif; font-size: 15px; color: var(--white); line-height: 1.2; }
+  .nav-logo-text span { display: block; font-size: 10px; color: var(--gold-light); font-family: 'Inter', sans-serif; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 0.5px; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--gold-light); }
+  .nav-cta {
+    background: var(--gold); color: var(--dark);
+    padding: 9px 20px; border-radius: 6px;
+    font-size: 13px; font-weight: 600; text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-light); }
+  .nav-hamburger { display: none; background: none; border: none; cursor: pointer; }
+  .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--white); margin: 4px 0; border-radius: 2px; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--dark);
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding: 100px 2rem 60px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(184,134,11,0.12) 0%, transparent 60%);
+  }
+  .hero-grid-lines {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image: repeating-linear-gradient(0deg, var(--gold) 0px, var(--gold) 1px, transparent 1px, transparent 80px),
+                      repeating-linear-gradient(90deg, var(--gold) 0px, var(--gold) 1px, transparent 1px, transparent 80px);
+  }
+  .hero-inner {
+    max-width: 1200px; margin: 0 auto; width: 100%;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(184,134,11,0.15); border: 1px solid rgba(184,134,11,0.3);
+    color: var(--gold-light); padding: 6px 14px; border-radius: 20px;
+    font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem;
+  }
+  .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--gold-light); border-radius: 50%; }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem); font-weight: 900; line-height: 1.1;
+    color: var(--white); margin-bottom: 1.5rem;
+  }
+  .hero h1 em { font-style: normal; color: var(--gold-light); }
+  .hero-desc {
+    font-size: 1.05rem; color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 2.5rem; max-width: 460px;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--gold); color: var(--dark); padding: 14px 28px;
+    border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none;
+    transition: all 0.2s; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-outline {
+    border: 1.5px solid rgba(184,134,11,0.5); color: var(--gold-light); padding: 13px 28px;
+    border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none;
+    transition: all 0.2s; display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--gold-light); background: rgba(184,134,11,0.08); }
+  .hero-visual {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  }
+  .hero-card {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(184,134,11,0.15);
+    border-radius: 12px; padding: 1.2rem; text-align: center;
+    transition: all 0.3s;
+  }
+  .hero-card:hover { background: rgba(184,134,11,0.08); border-color: rgba(184,134,11,0.3); transform: translateY(-2px); }
+  .hero-card:nth-child(1) { grid-column: 1 / -1; background: rgba(184,134,11,0.06); border-color: rgba(184,134,11,0.25); }
+  .hero-card-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .hero-card h3 { font-size: 13px; font-weight: 600; color: var(--gold-light); margin-bottom: 4px; }
+  .hero-card p { font-size: 11px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+  .hero-stats { display: flex; gap: 2rem; margin-top: 2rem; }
+  .hero-stat-val { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--gold-light); }
+  .hero-stat-lbl { font-size: 11px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+
+  /* SECTION COMMONS */
+  section { padding: 80px 2rem; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; color: var(--dark); line-height: 1.2;
+  }
+  .section-title em { font-style: normal; color: var(--gold); }
+  .section-sub { color: var(--text-muted); font-size: 1rem; line-height: 1.7; max-width: 560px; margin-top: 0.75rem; }
+  .section-header { margin-bottom: 3rem; }
+
+  /* SERVICES */
+  #services { background: var(--white); }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem;
+  }
+  .service-card {
+    border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem;
+    background: var(--off-white); transition: all 0.3s; cursor: default;
+  }
+  .service-card:hover { border-color: var(--gold); background: var(--gold-pale); transform: translateY(-3px); box-shadow: var(--shadow); }
+  .service-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+  .service-card h3 { font-size: 15px; font-weight: 600; color: var(--dark); margin-bottom: 6px; }
+  .service-card p { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+
+  /* PORTFOLIO */
+  #portfolio { background: var(--off-white); }
+  .portfolio-tabs { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .tab-btn {
+    padding: 8px 18px; border-radius: 20px;
+    border: 1px solid var(--border); background: var(--white);
+    font-size: 12px; font-weight: 500; color: var(--text-muted); cursor: pointer; transition: all 0.2s;
+  }
+  .tab-btn.active, .tab-btn:hover { background: var(--gold); border-color: var(--gold); color: var(--dark); font-weight: 600; }
+  .portfolio-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;
+  }
+  .portfolio-item {
+    border-radius: 12px; overflow: hidden; border: 1px solid var(--border);
+    background: var(--white); transition: all 0.3s;
+  }
+  .portfolio-item:hover { box-shadow: 0 8px 32px rgba(26,18,8,0.15); transform: translateY(-4px); }
+  .portfolio-img {
+    width: 100%; aspect-ratio: 16/9; object-fit: cover;
+    background: linear-gradient(135deg, #1a1208, #3d3020);
+    display: flex; align-items: center; justify-content: center; position: relative;
+    overflow: hidden;
+  }
+  .portfolio-img-placeholder {
+    width: 100%; aspect-ratio: 16/9;
+    display: flex; align-items: center; justify-content: center; flex-direction: column;
+    gap: 8px; color: rgba(255,255,255,0.5); font-size: 13px;
+  }
+  .portfolio-info { padding: 1rem 1.25rem; }
+  .portfolio-info h3 { font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+  .portfolio-info p { font-size: 12px; color: var(--text-muted); }
+  .portfolio-tag {
+    display: inline-block; margin-top: 8px;
+    background: var(--gold-pale); color: var(--gold); padding: 3px 10px;
+    border-radius: 12px; font-size: 10px; font-weight: 600; letter-spacing: 0.5px;
+  }
+
+  /* WHY US */
+  #why { background: var(--dark); }
+  #why .section-title { color: var(--white); }
+  #why .section-sub { color: rgba(255,255,255,0.55); }
+  #why .section-label { color: var(--gold-light); }
+  .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+  .why-card {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(184,134,11,0.15);
+    border-radius: 12px; padding: 1.75rem;
+  }
+  .why-num { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 900; color: rgba(184,134,11,0.2); margin-bottom: 0.75rem; }
+  .why-card h3 { font-size: 15px; font-weight: 600; color: var(--white); margin-bottom: 8px; }
+  .why-card p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.7; }
+
+  /* ORDER FORM */
+  #order { background: var(--white); }
+  .order-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .order-info h2 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--dark); margin-bottom: 1rem; }
+  .order-info p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.5rem; }
+  .contact-detail { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
+  .contact-icon { width: 40px; height: 40px; background: var(--gold-pale); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+  .contact-detail h4 { font-size: 12px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+  .contact-detail p { font-size: 14px; font-weight: 600; color: var(--dark); }
+  .order-form { background: var(--off-white); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { margin-bottom: 1.25rem; }
+  .form-group label { display: block; font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 10px 14px;
+    border: 1px solid var(--border); border-radius: 8px; background: var(--white);
+    font-family: 'Inter', sans-serif; font-size: 14px; color: var(--dark);
+    transition: border-color 0.2s; outline: none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(184,134,11,0.1);
+  }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-submit {
+    width: 100%; padding: 14px; background: var(--gold); border: none;
+    border-radius: 8px; font-family: 'Inter', sans-serif;
+    font-size: 15px; font-weight: 700; color: var(--dark); cursor: pointer;
+    transition: all 0.2s; letter-spacing: 0.5px;
+  }
+  .form-submit:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .form-note { font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 0.75rem; }
+  .form-success {
+    display: none; background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px;
+    padding: 1rem; text-align: center; color: #166534; font-size: 14px; margin-top: 1rem;
+  }
+
+  /* TESTIMONIALS */
+  #testimonials { background: var(--gold-pale); }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .testimonial-card {
+    background: var(--white); border-radius: 12px; padding: 1.75rem;
+    border: 1px solid var(--border); box-shadow: var(--shadow);
+  }
+  .testimonial-stars { color: var(--gold); font-size: 1rem; margin-bottom: 0.75rem; letter-spacing: 2px; }
+  .testimonial-card blockquote { font-size: 13.5px; color: var(--ink); line-height: 1.7; margin-bottom: 1rem; font-style: italic; }
+  .testimonial-author { display: flex; align-items: center; gap: 10px; }
+  .testimonial-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; color: var(--dark); flex-shrink: 0; }
+  .testimonial-author h4 { font-size: 13px; font-weight: 600; color: var(--dark); }
+  .testimonial-author span { font-size: 11px; color: var(--text-muted); }
+
+  /* FOOTER */
+  footer { background: var(--dark); color: rgba(255,255,255,0.6); padding: 60px 2rem 30px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .footer-brand h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--white); margin-bottom: 0.75rem; }
+  .footer-brand p { font-size: 13px; line-height: 1.8; max-width: 280px; }
+  .footer-col h4 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--gold-light); margin-bottom: 1rem; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.5rem; }
+  .footer-col ul li a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--gold-light); }
+  .footer-bottom { border-top: 1px solid rgba(184,134,11,0.15); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: gap; }
+  .footer-bottom p { font-size: 12px; }
+  .footer-bottom a { color: var(--gold-light); text-decoration: none; }
+  .whatsapp-float {
+    position: fixed; bottom: 24px; right: 24px; z-index: 999;
+    width: 56px; height: 56px; background: #25D366; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 16px rgba(37,211,102,0.4); text-decoration: none;
+    transition: transform 0.2s;
+  }
+  .whatsapp-float:hover { transform: scale(1.1); }
+  .whatsapp-float svg { width: 28px; height: 28px; fill: white; }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .nav-links, .nav-cta { display: none; }
+    .nav-hamburger { display: block; }
+    .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero-visual { grid-template-columns: 1fr 1fr; }
+    .hero h1 { font-size: 2.4rem; }
+    .order-layout { grid-template-columns: 1fr; gap: 2rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+    section { padding: 60px 1.25rem; }
+  }
+  @media (max-width: 480px) {
+    .hero-visual { grid-template-columns: 1fr; }
+    .hero-card:nth-child(1) { grid-column: 1; }
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon">BL</div>
+      <div class="nav-logo-text">BL Printing House<span>Ballabgarh, Faridabad</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#order">Contact</a></li>
+    </ul>
+    <a href="#order" class="nav-cta">Place Order</a>
+    <button class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">Est. Ballabgarh · Faridabad · Haryana</div>
+      <h1>Print That <em>Commands</em> Attention</h1>
+      <p class="hero-desc">From visiting cards to massive flex hoardings, LED signage to custom merchandise — BL Printing House delivers premium-quality printing for every business need.</p>
+      <div class="hero-actions">
+        <a href="#order" class="btn-primary">Get a Free Quote</a>
+        <a href="#portfolio" class="btn-outline">See Our Work</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-val">500+</div>
+          <div class="hero-stat-lbl">Clients Served</div>
+        </div>
+        <div>
+          <div class="hero-stat-val">15+</div>
+          <div class="hero-stat-lbl">Services</div>
+        </div>
+        <div>
+          <div class="hero-stat-val">24hr</div>
+          <div class="hero-stat-lbl">Turnaround</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-card-icon">🖨️</div>
+        <h3>Offset & Digital Printing</h3>
+        <p>Razor-sharp output on every substrate. Cards, books, catalogs & more.</p>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-icon">📋</div>
+        <h3>Flex & Hoarding</h3>
+        <p>Large-format outdoor advertising that stands out at any distance.</p>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-icon">💡</div>
+        <h3>LED Signage</h3>
+        <p>Vibrant illuminated boards for shops, showrooms & brand identity.</p>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-icon">👕</div>
+        <h3>Merchandise</h3>
+        <p>Custom mugs, T-shirts & branded products for events & businesses.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">What We Offer</p>
+      <h2 class="section-title">Complete Print <em>Solutions</em></h2>
+      <p class="section-sub">We handle every print need under one roof — from a single visiting card to full-scale outdoor advertising campaigns.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">📇</div>
+        <h3>Visiting Cards</h3>
+        <p>Premium matte, gloss, spot-UV & foil cards that make a lasting first impression.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📒</div>
+        <h3>Challan & Bill Books</h3>
+        <p>Custom-numbered invoices, challans, receipt books in NCR or regular paper.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📰</div>
+        <h3>Catalogs & Brochures</h3>
+        <p>Multi-page product catalogs and folded brochures with vivid color reproduction.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🖼️</div>
+        <h3>Pad Printing</h3>
+        <p>Logo & text printing on pens, keychains, stationery and irregular surfaces.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🪪</div>
+        <h3>ID Cards</h3>
+        <p>PVC or paper ID cards for schools, offices & events with custom designs.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🖥️</div>
+        <h3>Digital Printing</h3>
+        <p>High-resolution digital prints with quick turnaround for low to medium quantities.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⚙️</div>
+        <h3>Offset Printing</h3>
+        <p>Cost-effective, consistent color output for large volume print jobs.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🏙️</div>
+        <h3>Flex & Vinyl Printing</h3>
+        <p>Outdoor banners, hoardings, sunboard, wallpaper & wide-format flex boards.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">💡</div>
+        <h3>LED Signage & Boards</h3>
+        <p>Illuminated shop signs, acrylic letters, neon-look LED displays for businesses.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">☕</div>
+        <h3>Custom Mugs</h3>
+        <p>Sublimation-printed mugs for corporate gifting, events & personal use.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">👕</div>
+        <h3>T-Shirt Printing</h3>
+        <p>Custom T-shirt printing for teams, events, schools & brand merchandise.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🏢</div>
+        <h3>Sunboard Displays</h3>
+        <p>Lightweight, durable sunboard cutouts and displays for retail & exhibitions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">Our Work</p>
+      <h2 class="section-title">Printed With <em>Pride</em></h2>
+      <p class="section-sub">A glimpse of the work we've delivered for businesses across Ballabgarh, Faridabad and the NCR region.</p>
+    </div>
+    <div class="portfolio-tabs">
+      <button class="tab-btn active" onclick="filterPortfolio('all', this)">All</button>
+      <button class="tab-btn" onclick="filterPortfolio('flex', this)">Flex & Hoardings</button>
+      <button class="tab-btn" onclick="filterPortfolio('led', this)">LED Signage</button>
+      <button class="tab-btn" onclick="filterPortfolio('cards', this)">Cards & Print</button>
+      <button class="tab-btn" onclick="filterPortfolio('merch', this)">Merchandise</button>
+    </div>
+    <div class="portfolio-grid" id="portfolio-grid">
+
+      <div class="portfolio-item" data-cat="flex">
+        <div class="portfolio-img" style="background: linear-gradient(135deg, #1a1208, #2c1a00);">
+          <div class="portfolio-img-placeholder">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" style="opacity:0.3">
+              <rect x="4" y="10" width="40" height="28" rx="2" stroke="white" stroke-width="2"/>
+              <path d="M4 34l10-10 8 8 8-12 14 14" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+              <circle cx="14" cy="20" r="3" fill="white" opacity="0.5"/>
+            </svg>
+            <span style="font-size:12px; color:rgba(255,255,255,0.4)">Mango Smoothie Billboard</span>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <h3>Mango Smoothie Billboard</h3>
+          <p>Large outdoor hoarding with vibrant full-color flex printing</p>
+          <span class="portfolio-tag">Flex Printing</span>
+        </div>
+      </div>
+
+      <div class="portfolio-item" data-cat="flex">
+        <div class="portfolio-img" style="background: linear-gradient(135deg, #1c2b00, #2e4a00);">
+          <div class="portfolio-img-placeholder">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" style="opacity:0.3">
+              <rect x="4" y="10" width="40" height="28" rx="2" stroke="white" stroke-width="2"/>
+              <text x="24" y="30" text-anchor="middle" fill="white" font-size="10" font-weight="bold">50% OFF</text>
+            </svg>
+            <span style="font-size:12px; color:rgba(255,255,255,0.4)">Jaihind Sale Hoarding</span>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <h3>Jaihind Sale Hoarding</h3>
+          <p>Promotional outdoor signage with striking yellow and character graphics</p>
+          <span class="portfolio-tag">Outdoor Hoarding</span>
+        </div>
+      </div>
+
+      <div class="portfolio-item" data-cat="led">
+        <div class="portfolio-img" style="background: #111;">
+          <div class="portfolio-img-placeholder">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" style="opacity:0.4">
+              <rect x="2" y="2" width="44" height="44" rx="4" stroke="#FFD700" stroke-width="1.5"/>
+              <text x="24" y="20" text-anchor="middle" fill="#FF6B35" font-size="8" font-weight="bold">LED</text>
+              <text x="24" y="32" text-anchor="middle" fill="#4ECDC4" font-size="7">SIGNAGE</text>
+            </svg>
+            <span style="font-size:12px; color:rgba(255,255,255,0.4)">Multi-brand LED Display Wall</span>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <h3>LED Brand Display Wall</h3>
+          <p>Custom illuminated signage for brands including Visa, KIA, Dell, Cadbury & more</p>
+          <span class="portfolio-tag">LED Signage</span>
+        </div>
+      </div>
+
+      <div class="portfolio-item" data-cat="cards">
+        <div class="portfolio-img" style="background: linear-gradient(135deg, #f5f0e8, #e8dfc8);">
+          <div class="portfolio-img-placeholder">
+            <svg width="64" height="40" viewBox="0 0 64 40" fill="none" style="opacity:0.6">
+              <rect x="2" y="2" width="60" height="36" rx="4" fill="#F8F4EE" stroke="#B8860B" stroke-width="1.5"/>
+              <text x="18" y="16" text-anchor="middle" fill="#B8860B" font-size="10" font-weight="bold">BL</text>
+              <text x="42" y="14" text-anchor="middle" fill="#B8860B" font-size="7" font-weight="bold">YOGESH</text>
+              <text x="42" y="22" text-anchor="middle" fill="#6B5C40" font-size="5">999 990 6877</text>
+            </svg>
+            <span style="font-size:12px; color:rgba(100,80,40,0.6)">Premium Business Card</span>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <h3>Premium Visiting Card</h3>
+          <p>Luxury gold-foil business card with embossed monogram logo</p>
+          <span class="portfolio-tag">Visiting Card</span>
+        </div>
+      </div>
+
+      <div class="portfolio-item" data-cat="merch">
+        <div class="portfolio-img" style="background: linear-gradient(135deg, #1a1a2e, #16213e);">
+          <div class="portfolio-img-placeholder">
+            <svg width="40" height="48" viewBox="0 0 40 48" fill="none" style="opacity:0.35">
+              <path d="M12 4L4 12V44H36V12L28 4H12Z" stroke="white" stroke-width="1.5"/>
+              <path d="M12 4C12 4 10 10 8 12M28 4C28 4 30 10 32 12" stroke="white" stroke-width="1.5"/>
+              <rect x="12" y="20" width="16" height="12" rx="2" stroke="white" stroke-width="1.5"/>
+            </svg>
+            <span style="font-size:12px; color:rgba(255,255,255,0.4)">Custom T-Shirt</span>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <h3>Corporate T-Shirt Batch</h3>
+          <p>100-piece run for company event with full-color logo print on chest</p>
+          <span class="portfolio-tag">T-Shirt Printing</span>
+        </div>
+      </div>
+
+      <div class="portfolio-item" data-cat="flex">
+        <div class="portfolio-img" style="background: linear-gradient(135deg, #0a1628, #1a2744);">
+          <div class="portfolio-img-placeholder">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" style="opacity:0.3">
+              <rect x="4" y="14" width="40" height="24" rx="2" stroke="white" stroke-width="1.5"/>
+              <rect x="20" y="38" width="8" height="6" stroke="white" stroke-width="1.5"/>
+              <rect x="14" y="44" width="20" height="2" rx="1" stroke="white" stroke-width="1.5"/>
+            </svg>
+            <span style="font-size:12px; color:rgba(255,255,255,0.4)">Vinyl Wall Wrap</span>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <h3>Retail Vinyl Wall Wrap</h3>
+          <p>Full-wall vinyl application for a showroom interior branding project</p>
+          <span class="portfolio-tag">Vinyl Printing</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">Why Choose Us</p>
+      <h2 class="section-title" style="color:#fff;">The BL <em>Difference</em></h2>
+      <p class="section-sub">Businesses across Faridabad return to us because we treat every print job like our own reputation is on the line — because it is.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-num">01</div>
+        <h3>Quality You Can Feel</h3>
+        <p>We use industry-leading inks, materials and machinery to ensure every output looks premium and lasts longer.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">02</div>
+        <h3>Fast Turnaround</h3>
+        <p>Most orders ship within 24–48 hours. Express same-day service available for urgent printing needs.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">03</div>
+        <h3>All Under One Roof</h3>
+        <p>From a visiting card to a 20×10 ft flex hoarding — we handle everything so you don't need multiple vendors.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">04</div>
+        <h3>Competitive Pricing</h3>
+        <p>Direct factory pricing with no middlemen. Bulk discounts available for all service categories.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">05</div>
+        <h3>Expert Design Help</h3>
+        <p>Don't have a design? Our in-house team helps you create print-ready artwork at no extra cost.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">06</div>
+        <h3>Local & Reliable</h3>
+        <p>Located at Gali No. 2, Railway Road, Ballabgarh — easily accessible near Ballabgarh Metro Station.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER FORM -->
+<section id="order">
+  <div class="section-inner">
+    <div class="order-layout">
+      <div class="order-info">
+        <p class="section-label">Get In Touch</p>
+        <h2>Place Your Order or Request a Quote</h2>
+        <p>Fill out the form and Yogesh will get back to you within a few hours. You can also reach us directly via WhatsApp or call for instant assistance.</p>
+
+        <div class="contact-detail">
+          <div class="contact-icon">📞</div>
+          <div>
+            <h4>Phone / WhatsApp</h4>
+            <p><a href="tel:9999906877" style="color:var(--dark); text-decoration:none;">+91 9999 906 877</a></p>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">📧</div>
+          <div>
+            <h4>Email</h4>
+            <p><a href="mailto:vermay793@gmail.com" style="color:var(--dark); text-decoration:none;">vermay793@gmail.com</a></p>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">📍</div>
+          <div>
+            <h4>Address</h4>
+            <p>Gali No. 2, Railway Road, Near Ballabgarh Metro Station</p>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <h4>Working Hours</h4>
+            <p>Mon – Sat: 9:00 AM – 8:00 PM</p>
+          </div>
+        </div>
+
+        <div style="margin-top:2rem; padding:1.25rem; background:var(--gold-pale); border-radius:12px; border:1px solid var(--border);">
+          <p style="font-size:13px; color:var(--ink); font-weight:600; margin-bottom:8px;">📦 How to Order</p>
+          <ol style="font-size:12px; color:var(--text-muted); padding-left:1.25rem; line-height:2;">
+            <li>Fill the form with your print requirements</li>
+            <li>Attach your design file (or request design help)</li>
+            <li>Receive a quote & confirm your order</li>
+            <li>We print, you pick up or we deliver</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="order-form">
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.25rem; color:var(--dark); margin-bottom:1.5rem; font-weight:700;">Order Enquiry Form</h3>
+        <form onsubmit="submitOrder(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Your Name *</label>
+              <input type="text" placeholder="Rajesh Kumar" required>
+            </div>
+            <div class="form-group">
+              <label>Phone Number *</label>
+              <input type="tel" placeholder="+91 98765 43210" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="you@example.com">
+          </div>
+          <div class="form-group">
+            <label>Service Required *</label>
+            <select required>
+              <option value="">— Select a service —</option>
+              <optgroup label="Business Print">
+                <option>Visiting Card</option>
+                <option>ID Card</option>
+                <option>Challan / Bill Book</option>
+                <option>Catalog / Brochure</option>
+                <option>Pad Printing</option>
+              </optgroup>
+              <optgroup label="Digital & Offset">
+                <option>Digital Printing</option>
+                <option>Offset Printing</option>
+              </optgroup>
+              <optgroup label="Large Format & Outdoor">
+                <option>Flex Printing / Hoarding</option>
+                <option>Vinyl Printing</option>
+                <option>Wallpaper</option>
+                <option>Sunboard Display</option>
+                <option>Wide Format Printing</option>
+              </optgroup>
+              <optgroup label="Signage">
+                <option>LED Signage / Illuminated Board</option>
+              </optgroup>
+              <optgroup label="Merchandise">
+                <option>Custom Mug</option>
+                <option>T-Shirt Printing</option>
+              </optgroup>
+              <option>Other / Multiple Services</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Quantity</label>
+              <input type="number" placeholder="e.g. 500" min="1">
+            </div>
+            <div class="form-group">
+              <label>Size / Dimensions</label>
+              <input type="text" placeholder="e.g. A4, 3.5×2 in, 10×4 ft">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Deadline</label>
+            <input type="date">
+          </div>
+          <div class="form-group">
+            <label>Project Details & Special Requirements</label>
+            <textarea placeholder="Describe your project — paper type, finish (matte/gloss), number of colors, whether you have a design file ready, etc."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Submit Order Enquiry →</button>
+          <p class="form-note">We typically respond within 2–4 hours on business days.</p>
+        </form>
+        <div class="form-success" id="form-success">
+          ✅ Your enquiry has been submitted! Yogesh will contact you shortly on your phone/email.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">Client Reviews</p>
+      <h2 class="section-title">What Our <em>Clients Say</em></h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <blockquote>"Got our shop's LED signage done from BL Printing House — absolutely stunning quality. The neon-look letters make our store stand out on the street. Yogesh ji was very helpful throughout."</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">RK</div>
+          <div>
+            <h4>Ramesh Kumar</h4>
+            <span>Garment Shop Owner, Ballabgarh</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <blockquote>"We ordered 1000 visiting cards and 500 brochures. The quality is top-class — gold foil finish on the cards looked very premium. Delivered on time and pricing was very reasonable."</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">PS</div>
+          <div>
+            <h4>Priya Sharma</h4>
+            <span>Marketing Manager, Faridabad</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <blockquote>"Printed a 20×10 flex hoarding for our property business. The colors were vibrant and the print was crisp even at close range. Fast delivery and great service. Highly recommend!"</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">AM</div>
+          <div>
+            <h4>Ankit Mehta</h4>
+            <span>Real Estate Agent, NIT Faridabad</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>BL Printing House</h3>
+        <p>Your trusted print partner in Ballabgarh, Faridabad. Quality printing for businesses of all sizes — fast, reliable and affordable.</p>
+        <div style="margin-top:1rem; display:flex; gap:0.75rem;">
+          <a href="https://wa.me/919999906877" target="_blank" style="width:36px;height:36px;background:rgba(255,255,255,0.08);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#25D366;font-size:1.1rem;text-decoration:none;">💬</a>
+          <a href="tel:9999906877" style="width:36px;height:36px;background:rgba(255,255,255,0.08);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#B8860B;font-size:1.1rem;text-decoration:none;">📞</a>
+          <a href="mailto:vermay793@gmail.com" style="width:36px;height:36px;background:rgba(255,255,255,0.08);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#B8860B;font-size:1.1rem;text-decoration:none;">✉️</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#order">Visiting Cards</a></li>
+          <li><a href="#order">Challan Books</a></li>
+          <li><a href="#order">Flex Printing</a></li>
+          <li><a href="#order">LED Signage</a></li>
+          <li><a href="#order">T-Shirt Print</a></li>
+          <li><a href="#order">Custom Mugs</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#why">Why Us</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
+          <li><a href="#order">Place Order</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:9999906877">+91 9999 906 877</a></li>
+          <li><a href="mailto:vermay793@gmail.com">vermay793@gmail.com</a></li>
+          <li style="color:rgba(255,255,255,0.4);font-size:12px;line-height:1.6;">Gali No. 2, Railway Road,<br>Near Ballabgarh Metro Station,<br>Faridabad, Haryana</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 BL Printing House. All rights reserved. Contact: <a href="mailto:vermay793@gmail.com">vermay793@gmail.com</a></p>
+      <p style="font-size:11px;">Gali No. 2, Railway Road, Ballabgarh, Faridabad</p>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/919999906877?text=Hello%20Yogesh%20ji%2C%20I%20would%20like%20to%20enquire%20about%20your%20printing%20services." target="_blank" class="whatsapp-float" title="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<style>
+  @media (max-width: 768px) {
+    .nav-links.mobile-open { 
+      display: flex; flex-direction: column; gap: 0; position: absolute; top: 64px; left: 0; right: 0; 
+      background: rgba(26,18,8,0.98); padding: 1rem 2rem; border-top: 1px solid rgba(184,134,11,0.2);
+    }
+    .nav-links.mobile-open a { padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  }
+</style>
+
+<script>
+function filterPortfolio(cat, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.portfolio-item').forEach(item => {
+    if (cat === 'all' || item.dataset.cat === cat) {
+      item.style.display = '';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
+
+function submitOrder(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  btn.textContent = 'Submitting...';
+  btn.disabled = true;
+  setTimeout(() => {
+    e.target.style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  }, 1200);
+}
+
+// Smooth reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.service-card, .portfolio-item, .why-card, .testimonial-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
