@@ -176,16 +176,16 @@
   }
   .portfolio-item:hover { box-shadow: 0 8px 32px rgba(26,18,8,0.15); transform: translateY(-4px); }
   .portfolio-img {
-    width: 100%; aspect-ratio: 16/9; object-fit: cover;
-    background: linear-gradient(135deg, #1a1208, #3d3020);
-    display: flex; align-items: center; justify-content: center; position: relative;
-    overflow: hidden;
-  }
-  .portfolio-img-placeholder {
     width: 100%; aspect-ratio: 16/9;
-    display: flex; align-items: center; justify-content: center; flex-direction: column;
-    gap: 8px; color: rgba(255,255,255,0.5); font-size: 13px;
+    background: linear-gradient(135deg, #1a1208, #3d3020);
+    position: relative; overflow: hidden;
   }
+  .portfolio-img img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    transition: transform 0.4s ease;
+  }
+  .portfolio-item:hover .portfolio-img img { transform: scale(1.05); }
   .portfolio-info { padding: 1rem 1.25rem; }
   .portfolio-info h3 { font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
   .portfolio-info p { font-size: 12px; color: var(--text-muted); }
@@ -271,7 +271,7 @@
   .footer-col ul li { margin-bottom: 0.5rem; }
   .footer-col ul li a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 13px; transition: color 0.2s; }
   .footer-col ul li a:hover { color: var(--gold-light); }
-  .footer-bottom { border-top: 1px solid rgba(184,134,11,0.15); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: gap; }
+  .footer-bottom { border-top: 1px solid rgba(184,134,11,0.15); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
   .footer-bottom p { font-size: 12px; }
   .footer-bottom a { color: var(--gold-light); text-decoration: none; }
   .whatsapp-float {
@@ -468,18 +468,17 @@
       <button class="tab-btn" onclick="filterPortfolio('cards', this)">Cards & Print</button>
       <button class="tab-btn" onclick="filterPortfolio('merch', this)">Merchandise</button>
     </div>
+
+    <!--
+      PHOTO FILES: put these in an "images" folder next to this HTML file.
+      To add a new product, copy one full <div class="portfolio-item"> block,
+      then change data-cat, the image src/alt, the title, description and tag.
+    -->
     <div class="portfolio-grid" id="portfolio-grid">
 
       <div class="portfolio-item" data-cat="flex">
-        <div class="portfolio-img" style="background: linear-gradient(135deg, #1a1208, #2c1a00);">
-          <div class="portfolio-img-placeholder">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" style="opacity:0.3">
-              <rect x="4" y="10" width="40" height="28" rx="2" stroke="white" stroke-width="2"/>
-              <path d="M4 34l10-10 8 8 8-12 14 14" stroke="white" stroke-width="2" stroke-linejoin="round"/>
-              <circle cx="14" cy="20" r="3" fill="white" opacity="0.5"/>
-            </svg>
-            <span style="font-size:12px; color:rgba(255,255,255,0.4)">Mango Smoothie Billboard</span>
-          </div>
+        <div class="portfolio-img">
+          <img src="images/mango-billboard.jpg" alt="Mango Smoothie Billboard" loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="portfolio-info">
           <h3>Mango Smoothie Billboard</h3>
@@ -489,14 +488,8 @@
       </div>
 
       <div class="portfolio-item" data-cat="flex">
-        <div class="portfolio-img" style="background: linear-gradient(135deg, #1c2b00, #2e4a00);">
-          <div class="portfolio-img-placeholder">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" style="opacity:0.3">
-              <rect x="4" y="10" width="40" height="28" rx="2" stroke="white" stroke-width="2"/>
-              <text x="24" y="30" text-anchor="middle" fill="white" font-size="10" font-weight="bold">50% OFF</text>
-            </svg>
-            <span style="font-size:12px; color:rgba(255,255,255,0.4)">Jaihind Sale Hoarding</span>
-          </div>
+        <div class="portfolio-img">
+          <img src="images/jaihind-hoarding.jpg" alt="Jaihind Sale Hoarding" loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="portfolio-info">
           <h3>Jaihind Sale Hoarding</h3>
@@ -506,15 +499,8 @@
       </div>
 
       <div class="portfolio-item" data-cat="led">
-        <div class="portfolio-img" style="background: #111;">
-          <div class="portfolio-img-placeholder">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" style="opacity:0.4">
-              <rect x="2" y="2" width="44" height="44" rx="4" stroke="#FFD700" stroke-width="1.5"/>
-              <text x="24" y="20" text-anchor="middle" fill="#FF6B35" font-size="8" font-weight="bold">LED</text>
-              <text x="24" y="32" text-anchor="middle" fill="#4ECDC4" font-size="7">SIGNAGE</text>
-            </svg>
-            <span style="font-size:12px; color:rgba(255,255,255,0.4)">Multi-brand LED Display Wall</span>
-          </div>
+        <div class="portfolio-img">
+          <img src="images/led-wall.jpg" alt="LED Brand Display Wall" loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="portfolio-info">
           <h3>LED Brand Display Wall</h3>
@@ -524,16 +510,8 @@
       </div>
 
       <div class="portfolio-item" data-cat="cards">
-        <div class="portfolio-img" style="background: linear-gradient(135deg, #f5f0e8, #e8dfc8);">
-          <div class="portfolio-img-placeholder">
-            <svg width="64" height="40" viewBox="0 0 64 40" fill="none" style="opacity:0.6">
-              <rect x="2" y="2" width="60" height="36" rx="4" fill="#F8F4EE" stroke="#B8860B" stroke-width="1.5"/>
-              <text x="18" y="16" text-anchor="middle" fill="#B8860B" font-size="10" font-weight="bold">BL</text>
-              <text x="42" y="14" text-anchor="middle" fill="#B8860B" font-size="7" font-weight="bold">YOGESH</text>
-              <text x="42" y="22" text-anchor="middle" fill="#6B5C40" font-size="5">999 990 6877</text>
-            </svg>
-            <span style="font-size:12px; color:rgba(100,80,40,0.6)">Premium Business Card</span>
-          </div>
+        <div class="portfolio-img">
+          <img src="images/visiting-card.jpg" alt="Premium Visiting Card" loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="portfolio-info">
           <h3>Premium Visiting Card</h3>
@@ -543,15 +521,8 @@
       </div>
 
       <div class="portfolio-item" data-cat="merch">
-        <div class="portfolio-img" style="background: linear-gradient(135deg, #1a1a2e, #16213e);">
-          <div class="portfolio-img-placeholder">
-            <svg width="40" height="48" viewBox="0 0 40 48" fill="none" style="opacity:0.35">
-              <path d="M12 4L4 12V44H36V12L28 4H12Z" stroke="white" stroke-width="1.5"/>
-              <path d="M12 4C12 4 10 10 8 12M28 4C28 4 30 10 32 12" stroke="white" stroke-width="1.5"/>
-              <rect x="12" y="20" width="16" height="12" rx="2" stroke="white" stroke-width="1.5"/>
-            </svg>
-            <span style="font-size:12px; color:rgba(255,255,255,0.4)">Custom T-Shirt</span>
-          </div>
+        <div class="portfolio-img">
+          <img src="images/tshirt-batch.jpg" alt="Corporate T-Shirt Batch" loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="portfolio-info">
           <h3>Corporate T-Shirt Batch</h3>
@@ -561,15 +532,8 @@
       </div>
 
       <div class="portfolio-item" data-cat="flex">
-        <div class="portfolio-img" style="background: linear-gradient(135deg, #0a1628, #1a2744);">
-          <div class="portfolio-img-placeholder">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" style="opacity:0.3">
-              <rect x="4" y="14" width="40" height="24" rx="2" stroke="white" stroke-width="1.5"/>
-              <rect x="20" y="38" width="8" height="6" stroke="white" stroke-width="1.5"/>
-              <rect x="14" y="44" width="20" height="2" rx="1" stroke="white" stroke-width="1.5"/>
-            </svg>
-            <span style="font-size:12px; color:rgba(255,255,255,0.4)">Vinyl Wall Wrap</span>
-          </div>
+        <div class="portfolio-img">
+          <img src="images/vinyl-wrap.jpg" alt="Retail Vinyl Wall Wrap" loading="lazy" onerror="this.style.display='none'">
         </div>
         <div class="portfolio-info">
           <h3>Retail Vinyl Wall Wrap</h3>
@@ -903,8 +867,8 @@
 
 <style>
   @media (max-width: 768px) {
-    .nav-links.mobile-open { 
-      display: flex; flex-direction: column; gap: 0; position: absolute; top: 64px; left: 0; right: 0; 
+    .nav-links.mobile-open {
+      display: flex; flex-direction: column; gap: 0; position: absolute; top: 64px; left: 0; right: 0;
       background: rgba(26,18,8,0.98); padding: 1rem 2rem; border-top: 1px solid rgba(184,134,11,0.2);
     }
     .nav-links.mobile-open a { padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
